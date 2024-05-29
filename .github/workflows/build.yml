@@ -23,15 +23,11 @@ jobs:
 
       - name: Initialize Go module
         run: |
-          cd my-go-app
+          go mod init my-go-app
           go mod tidy
 
       - name: Build the application
-        run: |
-          cd my-go-app
-          go build -o my-go-app
+        run: go build -o my-go-app ./...
 
       - name: Run tests
-        run: |
-          cd my-go-app
-          go test ./...
+        run: go test ./...
