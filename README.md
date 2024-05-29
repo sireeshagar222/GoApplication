@@ -9,7 +9,9 @@ and configure a GitHub Actions pipeline to build the application, containerize i
 to a container registry. Use Terraform to create an EKS cluster with necessary add-ons.
 Finally, create a pipeline to deploy the application to the EKS cluster using Helm or
 Kustomize.
-Deliverables
+
+Deliverables :
+
 1)Go Application
 ● A simple Go application that serves "Hello from Botgauge" at the /hello path.
 ● Dockerfile to containerize the application.
