@@ -22,13 +22,16 @@ jobs:
           go-version: 1.16
 
       - name: Initialize Go module
-        run: go mod init my-go-app
-
-      - name: Get dependencies
-        run: go mod tidy
+        run: |
+          cd my-go-app
+          go mod tidy
 
       - name: Build the application
-        run: go build -o my-go-app
+        run: |
+          cd my-go-app
+          go build -o my-go-app
 
       - name: Run tests
-        run: go test ./...
+        run: |
+          cd my-go-app
+          go test ./...
