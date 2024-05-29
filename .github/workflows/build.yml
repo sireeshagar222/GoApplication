@@ -1,32 +1,34 @@
-name: Build and Push Docker Image
+name: Go Application CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.16
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
 
-    - name: Build the Go app
-      run: go build -o my-go-app
+      - name: Initialize Go module
+        run: go mod init my-go-app
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Get dependencies
+        run: go mod tidy
 
-    - name: Build and push Docker image
-      run: |
-        docker build -t my-docker-repo/my-go-app:latest .
-        docker push my-docker-repo/my-go-app:latest
+      - name: Build the application
+        run: go build -o my-go-app
+
+      - name: Run tests
+        run: go test ./...
