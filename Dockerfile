@@ -9,7 +9,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o /my-go-app
+RUN go build -o /GoApplication
 
 FROM alpine:latest
 
